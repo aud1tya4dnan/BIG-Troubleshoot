@@ -8,13 +8,13 @@ Step yang akan dicontohkan menggunakan platform `proxmox`, untuk platform lain b
 
 Matikan vm terlebih dahulu kemudian jalankan vm lagi
 
-![Start vm](./Start%20the%20VM.png)
+![Start vm](./image/Start%20the%20VM.png)
 
 ### Step 2
 
 Saat booting terdapat pilihan yang diberikan waktu hanya sekitar 20-15 detik untuk memilih boot option yang dapat ditampilkan seperti pada gambar
 
-![Select Rescue option](./Go%20to%20recovery%20sections%20(must%20move%20fast).png)
+![Select Rescue option](./image/Go%20to%20recovery%20sections%20(must%20move%20fast).png)
 
 Silahkan masuk ke rescue mode agar dapat memperbaiki initframs
 
@@ -22,18 +22,18 @@ Silahkan masuk ke rescue mode agar dapat memperbaiki initframs
 
 Ketika sudah masuk ke rescue mode masukkan credentials yang diberikan oleh BIG
 
-![Cred](./login%20using%20big%20credentials.png)
+![Cred](./image/login%20using%20big%20credentials.png)
 
 ### Step 4
 
 Kemudian ketikkan `dracut --regenerate-all --force` dan enter untuk merekonstruksi `initframs`
 
-![dracut](./use%20dracut%20--regenerate-all%20--force.png)
+![dracut](./image/use%20dracut%20--regenerate-all%20--force.png)
 
 ### Step 5
 
 Ketika selesai restart vm menggunakan tombol dari platform atau command linux `shutdown -r now`.
 
-![restart](./kemudian%20restart%20vm%20menggunakan%20tombol%20reboot%20maupun%20shutdown%20-r%20now.png)
+![restart](./image/kemudian%20restart%20vm%20menggunakan%20tombol%20reboot%20maupun%20shutdown%20-r%20now.png)
 
 ### Dan centos sudah dapat digunakan dengan normal
