@@ -6,4 +6,4 @@ Digunakan untuk mendokumentasikan step-step memecahkan masalah yang terjadi keti
 Berikut merupakan daftar isi dari solusi hasil troubleshoot yang kami lakukan
 - [Dracut Rescue Problem](https://github.com/aud1tya4dnan/BIG-Troubleshoot/tree/main/Dracut%20problems)
 - [fix centos repository](https://github.com/aud1tya4dnan/BIG-Troubleshoot/tree/main/CentOS%20Repo%20Problems)
-- [Palapa Yum Proxy](https://github.com/aud1tya4dnan/BIG-Troubleshoot/tree/main/Palapa%20Yum %20Proxy)
+- [fix centos repository](https://github.com/aud1tya4dnan/BIG-Troubleshoot/tree/main/CentOS%20Repo%20Problems)
