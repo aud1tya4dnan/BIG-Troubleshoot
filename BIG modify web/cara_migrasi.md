@@ -34,3 +34,6 @@ chmod +rx *.sh
 - Ikut instruksi selanjutnya
 
 - Masukan nama domain name geoportal tanpa http
+
+### Footnote
+Dapat juga menggunakan script yang telah saya buat.
