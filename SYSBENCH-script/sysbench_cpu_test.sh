@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Define custom output directory
 RESULT_DIR="/home/sysbench_tests/cpu_results"
 
