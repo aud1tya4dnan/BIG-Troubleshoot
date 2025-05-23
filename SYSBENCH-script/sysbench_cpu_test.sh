@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define custom output directory
-RESULT_DIR="/home/sysbench_tests/results"
+RESULT_DIR="/home/sysbench_tests/cpu_results"
 
 # Create it if it doesn't exist
 mkdir -p "$RESULT_DIR"

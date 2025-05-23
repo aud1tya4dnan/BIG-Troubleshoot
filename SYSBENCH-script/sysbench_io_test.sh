@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-RESULT_DIR="/home/andanasher/Programs/sysbench/io_results"
+RESULT_DIR="/home/sysbench_tests/io_results"
 mkdir -p "$RESULT_DIR"
 
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
