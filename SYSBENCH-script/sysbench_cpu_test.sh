@@ -16,7 +16,7 @@ CSV_SINGLE="$RESULT_DIR/sysbench_cpu_single_$TIMESTAMP.csv"
 CSV_MULTI="$RESULT_DIR/sysbench_cpu_multi_$TIMESTAMP.csv"
 
 # Iterations
-ITERATIONS=10
+ITERATIONS=1
 
 # Sysbench CPU Test Parameters
 MAX_PRIME=10000
@@ -56,7 +56,7 @@ for i in $(seq 1 $ITERATIONS); do
     latency_95th=$(echo "$OUTPUT" | grep "95th percentile:" | awk '{print $3}')
     latency_max=$(echo "$OUTPUT" | grep "max:" | awk '{print $2}')
 
-    echo "$i,$THREADS,$total_time,$events_sec,$latency_avg,$latency_95th,$latency_max" >> "$CSV_MULTI"
+    echo "$i,$MULTI_THREAD,$total_time,$events_sec,$latency_avg,$latency_95th,$latency_max" >> "$CSV_MULTI"
 done
 
 echo "Done!"

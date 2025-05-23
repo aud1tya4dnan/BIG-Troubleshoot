@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Define custom output directory
-RESULT_DIR="/home/andanasher/sysbench_tests/mem_results"
+RESULT_DIR="/home/sysbench_tests/mem_results"
 
 # Create it if it doesn't exist
 mkdir -p "$RESULT_DIR"
