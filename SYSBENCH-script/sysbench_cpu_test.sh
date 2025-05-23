@@ -57,6 +57,6 @@ for i in $(seq 1 $ITERATIONS); do
     echo "$i,$THREADS,$total_time,$events_sec,$latency_avg,$latency_95th,$latency_max" >> "$CSV_MULTI"
 done
 
-echo "✅ Done!"
+echo "Done!"
 echo "Single-thread results: $CSV_SINGLE"
 echo "Multi-thread results:  $CSV_MULTI"
