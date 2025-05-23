@@ -19,7 +19,7 @@ CSV_WRITE="$RESULT_DIR/sysbench_mem_write_$TIMESTAMP.csv"
 ITERATIONS=10
 
 # Sysbench Memory Test Parameters
-MEM_BLOCKSIZE=5M
+MEM_BLOCKSIZE=4M
 RAM_MB=$(free -m | awk '/^Mem:/ {print $2}')
 MEM_TOTALSIZE=$((RAM_MB * 2))M
 
