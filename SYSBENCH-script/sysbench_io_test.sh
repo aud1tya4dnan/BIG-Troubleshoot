@@ -10,8 +10,8 @@ CSV_FILE="$RESULT_DIR/fileio_palapa_${TIMESTAMP}.csv"
 
 # Workload / concurrency
 THREADS=$(nproc)
-TEST_TIME=300
-ITERATIONS=5
+TEST_TIME=60
+ITERATIONS=10
 
 # I/O pattern
 BLOCK_SIZE=4K

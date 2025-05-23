@@ -16,7 +16,7 @@ CSV_SINGLE="$RESULT_DIR/sysbench_cpu_single_$TIMESTAMP.csv"
 CSV_MULTI="$RESULT_DIR/sysbench_cpu_multi_$TIMESTAMP.csv"
 
 # Iterations
-ITERATIONS=5
+ITERATIONS=10
 
 # Sysbench CPU Test Parameters
 MAX_PRIME=10000

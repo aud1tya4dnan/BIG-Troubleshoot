@@ -16,7 +16,7 @@ CSV_READ="$RESULT_DIR/sysbench_mem_read_$TIMESTAMP.csv"
 CSV_WRITE="$RESULT_DIR/sysbench_mem_write_$TIMESTAMP.csv"
 
 # Iterations
-ITERATIONS=5
+ITERATIONS=10
 
 # Sysbench Memory Test Parameters
 MEM_BLOCKSIZE="10M"
