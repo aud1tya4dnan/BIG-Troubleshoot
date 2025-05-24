@@ -36,6 +36,7 @@ yum install -y iperf3
 # firewall untuk iperf3
 
 firewall-cmd --permanent --add-port=5201/tcp
+firewall-cmd --reload
 
 # install sysbench
 
