@@ -69,8 +69,8 @@ for i in $(seq 1 "$ITERATIONS"); do
 
     # ── parsing hasil ────────────────────────────────────────────
     total_time=$(echo "$OUTPUT" | awk '/total time:/ {print $3}')
-    read_fio=$(echo "$OUTPUT" | awk '/reads\/s:/ {print $3}')
-    write_fio=$(echo "$OUTPUT" | awk '/writes\/s:/ {print $3}')
+    read_fio=$(echo "$OUTPUT" | awk '/reads\/s:/ {print $2}')
+    write_fio=$(echo "$OUTPUT" | awk '/writes\/s:/ {print $2}')
     read_throughput=$(echo "$OUTPUT" | awk '/read, MiB\/s:/ {print $3}')
     write_throughput=$(echo "$OUTPUT" | awk '/written, MiB\/s:/ {print $3}')
     avg_lat=$(echo "$OUTPUT" | awk '/avg:/ {print $2}')
