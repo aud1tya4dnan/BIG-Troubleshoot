@@ -28,7 +28,7 @@ IO_MODE=async
 FSYNC_FREQ=0        # flush setiap request (paling realistis)
 EXTRA_FLAGS=direct  # bypass cache
 
-echo "iteration,total_time_s,reads_s,writes_s,read_MiB_s,write_MiB_s,avg_lat_ms,p95_lat_ms,max_lat_ms" > "$CSV_FILE"
+echo "iteration,total_time_s,reads_s,writes_s,read_MiB_s,write_MiB_s,avg_lat_ms" > "$CSV_FILE"
 
 echo -e "\nFile uji = $(pwd)"
 echo "Tiap iterasi  = $TEST_TIME s"
@@ -71,9 +71,7 @@ for i in $(seq 1 "$ITERATIONS"); do
     read_throughput=$(echo "$OUTPUT" | awk '/read, MiB\/s:/ {print $3}')
     write_throughput=$(echo "$OUTPUT" | awk '/written, MiB\/s:/ {print $3}')
     avg_lat=$(echo "$OUTPUT" | awk '/avg:/ {print $2}')
-    p95_lat=$(echo "$OUTPUT" | awk '/95th percentile:/ {print $3}')
-    max_lat=$(echo "$OUTPUT" | awk '/max:/ {print $2}')
-    echo "$i,$total_time,$read_throughput,$write_throughput,$avg_lat,$p95_lat,$max_lat" >> "$CSV_FILE"
+    echo "$i,$total_time,$read_throughput,$write_throughput,$avg_lat" >> "$CSV_FILE"
 done
 
 ########### ─── BERSIH-BERSIH ───────────────────────────────────────────
