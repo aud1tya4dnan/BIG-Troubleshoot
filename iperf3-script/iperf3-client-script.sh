@@ -1,20 +1,21 @@
 #!/bin/bash
+set -euo pipefail
 
 # Membaca input dari pengguna
 # Input memasukkan lokasi penyimpanan hasil
-read -p "Masukkan lokasi penyimpanan hasil (default: /home/iperf3/): " RESULT_DIR
+read -p "Masukkan lokasi penyimpanan hasil (default: /home/iperf3-results/client): " RESULT_DIR
 read -p "Masukkan IP Virtual Machine Palapa: " SERVER_IP
 
 # Jika pengguna tidak memasukkan lokasi penyimpanan, gunakan default
 if [ -z "$RESULT_DIR" ]; then
-  RESULT_DIR="/home/iperf3/" # Lokasi penyimpanan default
+  RESULT_DIR="/home/iperf3-results/client" # Lokasi penyimpanan default
 fi
 
 #RESULT_DIR="/home/iperf3/" # Lokasi penyimpanan
 mkdir -p "$RESULT_DIR"
 
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-CSV_RESULT="$RESULT_DIR/iperf3_result_$TIMESTAMP.csv"
+CSV_RESULT="$RESULT_DIR/iperf3_client_$TIMESTAMP.csv"
 
 # Konfigurasi
 #SERVER_IP="" # IP Virtual Machine Palapa
