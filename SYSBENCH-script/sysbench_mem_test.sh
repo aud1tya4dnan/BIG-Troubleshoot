@@ -15,8 +15,8 @@ mkdir -p "$RESULT_DIR"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 
 # CSV filenames with full path
-CSV_READ="$RESULT_DIR/sysbench_mem_read_${TIMESTAMP}.csv"
-CSV_WRITE="$RESULT_DIR/sysbench_mem_write_${TIMESTAMP}.csv"
+CSV_READ="$RESULT_DIR/sysbench_mem_read_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
+CSV_WRITE="$RESULT_DIR/sysbench_mem_write_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
 
 # Iterations
 ITERATIONS=10
