@@ -74,7 +74,7 @@ for i in $(seq 1 "$ITERATIONS"); do
     read_throughput=$(echo "$OUTPUT" | awk '/read, MiB\/s:/ {print $3}')
     write_throughput=$(echo "$OUTPUT" | awk '/written, MiB\/s:/ {print $3}')
     avg_lat=$(echo "$OUTPUT" | awk '/avg:/ {print $2}')
-    echo "$i,$total_time,$read_throughput,$write_throughput,$avg_lat" >> "$CSV_FILE"
+    echo "$i,$total_time,$read_fio,$write_fio,$read_throughput,$write_throughput,$avg_lat" >> "$CSV_FILE"
 done
 
 ########### ─── BERSIH-BERSIH ───────────────────────────────────────────
