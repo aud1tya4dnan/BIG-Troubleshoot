@@ -7,7 +7,7 @@ set -euo pipefail
 read -p "Masukkan jumlah vm yang berjalan: " VM_COUNT
 read -p "Masukkan nama instance: " INSTANCE_NAME
 
-RESULT_DIR="/home/sysbench_tests/cpu_results"
+RESULT_DIR="/home/sysbench_tests/cpu_results_${VM_COUNT}_${INSTANCE_NAME}"
 
 # Create it if it doesn't exist
 mkdir -p "$RESULT_DIR"
@@ -19,8 +19,8 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 # CSV_SINGLE="$RESULT_DIR/sysbench_cpu_single_$TIMESTAMP.csv"
 # CSV_MULTI="$RESULT_DIR/sysbench_cpu_multi_$TIMESTAMP.csv"
 
-CSV_SINGLE="$RESULT_DIR/sysbench_cpu_single_'$TIMESTAMP'_'$VM_COUNT'_'$INSTANCE_NAME'.csv"
-CSV_MULTI="$RESULT_DIR/sysbench_cpu_multi_'$TIMESTAMP'_'$VM_COUNT'_'$INSTANCE_NAME'.csv"
+CSV_SINGLE="$RESULT_DIR/sysbench_cpu_single_$TIMESTAMP.csv"
+CSV_MULTI="$RESULT_DIR/sysbench_cpu_multi_$TIMESTAMP.csv"
 
 # Iterations
 ITERATIONS=10

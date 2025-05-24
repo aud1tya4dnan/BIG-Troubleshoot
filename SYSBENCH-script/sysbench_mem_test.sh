@@ -6,7 +6,7 @@ read -p "Masukkan jumlah vm yang berjalan: " VM_COUNT
 read -p "Masukkan nama instance: " INSTANCE_NAME
 
 # Define custom output directory
-RESULT_DIR="/home/sysbench_tests/mem_results"
+RESULT_DIR="/home/sysbench_tests/mem_results_${VM_COUNT}_${INSTANCE_NAME}"
 
 # Create it if it doesn't exist
 mkdir -p "$RESULT_DIR"
@@ -15,8 +15,8 @@ mkdir -p "$RESULT_DIR"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 
 # CSV filenames with full path
-CSV_READ="$RESULT_DIR/sysbench_mem_read_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
-CSV_WRITE="$RESULT_DIR/sysbench_mem_write_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
+CSV_READ="$RESULT_DIR/sysbench_mem_read_${TIMESTAMP}.csv"
+CSV_WRITE="$RESULT_DIR/sysbench_mem_write_${TIMESTAMP}.csv"
 
 # Iterations
 ITERATIONS=10
