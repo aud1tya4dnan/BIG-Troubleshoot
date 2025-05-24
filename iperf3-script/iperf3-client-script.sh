@@ -20,7 +20,7 @@ CSV_RESULT="$RESULT_DIR/iperf3_client_$TIMESTAMP.csv"
 # Konfigurasi
 #SERVER_IP="" # IP Virtual Machine Palapa
 DURATION=10
-ITERATIONS=1 # Iterasi
+ITERATIONS=10 # Iterasi
 
 echo "Creating results file: $CSV_RESULT"
 echo "iteration,interval,sender_transfer,sender_bitrate,retrans,receiver_transfer,receiver_bitrate" > "$CSV_RESULT"
