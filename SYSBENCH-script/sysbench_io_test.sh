@@ -9,7 +9,7 @@ RESULT_DIR="/home/sysbench_tests/io_results_${VM_COUNT}_${INSTANCE_NAME}"
 mkdir -p "$RESULT_DIR"
 
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-CSV_FILE="$RESULT_DIR/fileio_palapa_${TIMESTAMP}.csv"
+CSV_FILE="$RESULT_DIR/fileio_palapa_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
 
 # Workload / concurrency
 THREADS=$(nproc)
