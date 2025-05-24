@@ -20,7 +20,7 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 # CSV_MULTI="$RESULT_DIR/sysbench_cpu_multi_$TIMESTAMP.csv"
 
 CSV_SINGLE="$RESULT_DIR/sysbench_cpu_single_'$TIMESTAMP'_'$VM_COUNT'_'$INSTANCE_NAME'.csv"
-CSV_MULTI="$RESULT_DIR/sysbench_cpu_multi_$TIMESTAMP_'$VM_COUNT'_'$INSTANCE_NAME'.csv"
+CSV_MULTI="$RESULT_DIR/sysbench_cpu_multi_'$TIMESTAMP'_'$VM_COUNT'_'$INSTANCE_NAME'.csv"
 
 # Iterations
 ITERATIONS=10
