@@ -2,11 +2,14 @@
 
 set -euo pipefail
 
+read -p "Masukkan jumlah vm yang berjalan: " VM_COUNT
+read -p "Masukkan nama instance: " INSTANCE_NAME
+
 RESULT_DIR="/home/sysbench_tests/io_results"
 mkdir -p "$RESULT_DIR"
 
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-CSV_FILE="$RESULT_DIR/fileio_palapa_${TIMESTAMP}.csv"
+CSV_FILE="$RESULT_DIR/fileio_palapa_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
 
 # Workload / concurrency
 THREADS=$(nproc)
