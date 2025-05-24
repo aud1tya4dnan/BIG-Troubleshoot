@@ -47,7 +47,7 @@ for i in $(seq 1 $ITERATIONS); do
 
     OUTPUT=$(sysbench memory --memory-block-size=$MEM_BLOCKSIZE --memory-total-size=$MEM_TOTALSIZE --memory-access-mode=seq --memory-oper=write --threads=1 run)
 
-    ops_sec=$(echo "$OUTPUT" | grep "Total operations:" | awk '{print $4}' | tr -d '()')
+    ops_sec=$(echo "$OUTPUT" | grep "Total operations:" | awk '{print $5}' | tr -d '()')
     mb_sec=$(echo "$OUTPUT" | grep "transferred" | awk '{print $4}' | tr -d '()')
 
     echo "$i,write,$MEM_BLOCKSIZE,$MEM_TOTALSIZE,$ops_sec,$mb_sec" >> "$CSV_WRITE"
