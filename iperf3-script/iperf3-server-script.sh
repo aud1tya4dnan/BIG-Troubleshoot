@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
-
-read -p "Masukkan lokasi penyimpanan hasil (default: /home/iperf3-results/server): " RESULT_DIR
 read -p "Masukan Tipe Test(Internal/External): " TEST_TYPE
+read -p "Masukkan lokasi penyimpanan hasil (default: /home/iperf3-results/server): " RESULT_DIR
+
 
 # Jika pengguna tidak memasukkan lokasi penyimpanan, gunakan default
 if [ -z "$RESULT_DIR" ]; then
