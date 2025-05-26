@@ -3,6 +3,7 @@ set -euo pipefail
 
 # Membaca input dari pengguna
 # Input memasukkan lokasi penyimpanan hasil
+read -p "Masukan Tipe Test(Internal/External): " TEST_TYPE
 read -p "Masukkan lokasi penyimpanan hasil (default: /home/iperf3-results/client): " RESULT_DIR
 read -p "Masukkan IP Virtual Machine Palapa: " SERVER_IP
 
@@ -15,7 +16,7 @@ fi
 mkdir -p "$RESULT_DIR"
 
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-CSV_RESULT="$RESULT_DIR/iperf3_client_$TIMESTAMP.csv"
+CSV_RESULT="$RESULT_DIR/${TEST_TYPE}_iperf3_client_$TIMESTAMP.csv"
 
 # Konfigurasi
 #SERVER_IP="" # IP Virtual Machine Palapa
