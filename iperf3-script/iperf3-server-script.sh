@@ -2,6 +2,7 @@
 set -euo pipefail
 
 read -p "Masukkan lokasi penyimpanan hasil (default: /home/iperf3-results/server): " RESULT_DIR
+read -p "Masukan Tipe Test(Internal/External): " TEST_TYPE
 
 # Jika pengguna tidak memasukkan lokasi penyimpanan, gunakan default
 if [ -z "$RESULT_DIR" ]; then
@@ -12,7 +13,7 @@ fi
 mkdir -p "$RESULT_DIR"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 CSV_FILE="$RESULT_DIR/iperf3_server_$TIMESTAMP.csv"
-TMP_OUTPUT="$RESULT_DIR/iperf3_raw_$TIMESTAMP.log"
+TMP_OUTPUT="$RESULT_DIR/${TEST_TYPE}iperf3_raw_$TIMESTAMP.log"
 
 # Fungsi cleanup dan parsing saat Ctrl+C
 function cleanup() {
