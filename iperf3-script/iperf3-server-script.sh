@@ -12,7 +12,7 @@ fi
 # Output directory dan file
 mkdir -p "$RESULT_DIR"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-CSV_FILE="$RESULT_DIR/iperf3_server_$TIMESTAMP.csv"
+CSV_FILE="$RESULT_DIR/${TEST_TYPE}_iperf3_server_$TIMESTAMP.csv"
 TMP_OUTPUT="$RESULT_DIR/${TEST_TYPE}iperf3_raw_$TIMESTAMP.log"
 
 # Fungsi cleanup dan parsing saat Ctrl+C
