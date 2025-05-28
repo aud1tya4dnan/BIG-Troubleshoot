@@ -17,8 +17,9 @@ check_ping github.com &
 # Tunggu semua background ping selesai
 wait
 
+directory="/root/BIG-Troubleshoot/BIG-modify-web"
 # Daftar file yang akan disalin
-files=("migratevm_new_modif.sh" "chpass.sh" "hosts")
+files=("$directory/migratevm_new_modif.sh" "$directory/chpass.sh" "$directory/hosts")
 
 # Salin file ke /home jika ada
 for file in "${files[@]}"; do
