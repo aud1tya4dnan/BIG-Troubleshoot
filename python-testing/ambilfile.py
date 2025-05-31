@@ -10,12 +10,12 @@ ip_big2 = os.environ.get('IP_BIG_2')
 ip_big3 = os.environ.get('IP_BIG_3')
 user_big = os.environ.get('USER')
 password_big = os.environ.get('PASS')
-location_transfer = os.environ.get('FILE_LOCATION')
+location_transfer_big1 = os.environ.get('FILE_LOCATION_BIG1')
 
 hosts = [
-    {"ip": ip_big1, "name": "big1", "local_dir": os.path.join(location_transfer), "has_iperf3": True},
-    {"ip": ip_big2, "name": "big2", "local_dir": os.path.join(location_transfer), "has_iperf3": True},
-    {"ip": ip_big3, "name": "big3", "local_dir": os.path.join(location_transfer), "has_iperf3": False},
+    {"ip": ip_big1, "name": "big1", "local_dir": r"D:\TA_script\big1", "has_iperf3": True},
+    {"ip": ip_big2, "name": "big2", "local_dir": r"D:\TA_script\big2", "has_iperf3": True},
+    {"ip": ip_big3, "name": "big3", "local_dir": r"D:\TA_script\big3", "has_iperf3": False},
 ]
 
 USERNAME = user_big
