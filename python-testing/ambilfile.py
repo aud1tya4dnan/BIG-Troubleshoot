@@ -1,24 +1,15 @@
 import paramiko
 import os
 import stat  # ✅ FIX penting
-from dotenv import load_dotenv
-
-load_dotenv(override=True)
-
-ip_big1 = os.environ.get('IP_BIG_1')
-ip_big2 = os.environ.get('IP_BIG_2')
-ip_big3 = os.environ.get('IP_BIG_3')
-user_big = os.environ.get('USER')
-password_big = os.environ.get('PASS')
 
 hosts = [
-    {"ip": ip_big1, "name": "big1", "local_dir": r"D:\TA_script\big1", "has_iperf3": True},
-    {"ip": ip_big2, "name": "big2", "local_dir": r"D:\TA_script\big2", "has_iperf3": True},
-    {"ip": ip_big3, "name": "big3", "local_dir": r"D:\TA_script\big3", "has_iperf3": False},
+    {"ip": "10.4.89.239", "name": "big1", "local_dir": r"D:\TA_script\big1", "has_iperf3": True},
+    {"ip": "10.4.89.235", "name": "big2", "local_dir": r"D:\TA_script\big2", "has_iperf3": True},
+    {"ip": "10.4.89.240", "name": "big3", "local_dir": r"D:\TA_script\big3", "has_iperf3": False},
 ]
 
-USERNAME = user_big
-PASSWORD = password_big
+USERNAME = "root"
+PASSWORD = "code12"
 
 def download_dir_sftp(hostname, port, username, password, remote_dir, local_dir):
     transport = paramiko.Transport((hostname, port))
@@ -79,3 +70,4 @@ for host in hosts:
             print(f"⚠  Gagal mengunduh iperf3 dari {host['name']}: {e}")
     else:
         print(f"⏩ Melewati iperf3 dari {host['name']} (tidak ada folder).")
+
