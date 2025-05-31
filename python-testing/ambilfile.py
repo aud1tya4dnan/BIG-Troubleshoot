@@ -10,7 +10,6 @@ ip_big2 = os.environ.get('IP_BIG_2')
 ip_big3 = os.environ.get('IP_BIG_3')
 user_big = os.environ.get('USER')
 password_big = os.environ.get('PASS')
-location_transfer_big1 = os.environ.get('FILE_LOCATION_BIG1')
 
 hosts = [
     {"ip": ip_big1, "name": "big1", "local_dir": r"D:\TA_script\big1", "has_iperf3": True},
