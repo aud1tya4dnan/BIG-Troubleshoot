@@ -1,15 +1,23 @@
 from pexpect import pxssh
 import threading
 import time
+import os
+from dotenv import load_dotenv
 
+load_dotenv(override=True)
+
+ip_big1 = os.environ.get('IP_BIG_1')
+ip_big2 = os.environ.get('IP_BIG_2')
+ip_big3 = os.environ.get('IP_BIG_3')
+password_big = os.environ.get('PASS')
 # Daftar host
 hosts = [
-    {"ip": "10.4.89.225", "name": "big1"},
-    {"ip": "10.4.89.227", "name": "big2"},
-    {"ip": "10.4.89.228", "name": "big3"},
+    {"ip": ip_big1, "name": "big1"},
+    {"ip": ip_big2, "name": "big2"},
+    {"ip": ip_big3, "name": "big3"},
 ]
 
-PASSWORD = "code12"
+PASSWORD = password_big
 
 # Mapping test ke path script
 test_scripts = {
