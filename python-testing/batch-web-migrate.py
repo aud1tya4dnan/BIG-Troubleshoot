@@ -19,26 +19,65 @@ hosts = [
 
 PASSWORD = password_big
 
-# Path to your script on the remote machine
-remote_script = 'bash website-script.sh'
+# Mapping test ke path script
+test_scripts = "/root/BIG-Troubleshoot/website-script.sh"
 
-# SSH options to avoid host key checking (optional, for automation)
-ssh_options = '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
-for host in hosts:
-    print(f"Connecting to {host}...")
+def run_test_on_host(host, vm_count, script_path):
     try:
-        child = pexpect.spawn(f'ssh {ssh_options} {host} "{remote_script}"', timeout=120)
-        child.logfile = None  # Set to sys.stdout if you want to see output
-        child.expect(pexpect.EOF)
-        print(f"Finished running script on {host}")
-    except Exception as e:
-        print(f"Error on {host}: {e}")
+        s = pxssh.pxssh()
+        s.login(host["ip"], "root", PASSWORD)
+        print(f"[{host['name']}] Connected.")
 
+        s.sendline("cd /root/BIG-Troubleshoot")  # Pindah ke direktori script
+        s.sendline("git pull") # Update script jika ada perubahan
+
+        s.sendline(f"bash {script_path}")
+
+        # Tunggu prompt jumlah VM
+        s.expect(r"IP publik mesin ini*:")
+        s.sendline(host["ip"])
+
+        # Tunggu prompt nama instance
+        s.expect(r"Nama domain mesin ini*:")
+        s.sendline(host["ip"])  # kirim nama miliknya sendiri saja
+
+        # Kirim tombol enter untuk melanjutkan
+        s.sendline("")  # Kirim enter
+
+        s.prompt(timeout=600)
+        print(f"[{host['name']}] Output:\n{s.before.decode(errors='ignore')}")
+        s.logout()
+
+    except pxssh.ExceptionPxssh as e:
+        print(f"[{host['name']}] SSH session failed: {e}")
+    except Exception as e:
+        print(f"[{host['name']}] Error: {e}")
 
 def main():
-    vm_count = 3
-    script_path = "/root/BIG-Troubleshoot/website-script.sh"  # Ganti dengan path script yang sesuai
+    print("PASTIKAN SEMUA DATA SUDAH DIEXTRACT SEBELUM MENJALANKAN SCRIPT INI!")
+    print("KETIKA MENJALANKAN SCRIPT INI SEMUA DATA DALAM /home/sysbench_tests AKAN DIHAPUS!")
+    print("=== SYSBENCH TEST RUNNER ===")
+    # test_type = input("Mau test apa? (io / mem / cpu): ").strip().lower()
+
+    # if test_type not in test_scripts:
+    #     print("❌ Jenis test tidak valid.")
+    #     return
+
+    # try:
+    #     vm_count = int(input("Mau dijalankan di berapa VM? (1 / 2 / 3): ").strip())
+    #     if vm_count not in [1, 2, 3]:
+    #         raise ValueError
+    # except ValueError:
+    #     print("❌ Jumlah VM tidak valid.")
+    #     return
+
+    vm_count = 3  # Ganti dengan jumlah VM yang diinginkan
+    script_path = test_scripts
+
+    selected_hosts = hosts[:vm_count]
+    script_path = test_scripts
+
     threads = []
     for host in selected_hosts:
         t = threading.Thread(target=run_test_on_host, args=(host, vm_count, script_path))
@@ -47,3 +86,8 @@ def main():
 
     for t in threads:
         t.join()
+
+    print("✅ Semua test selesai.")
+    
+if __name__ == "__main__":
+    main()
