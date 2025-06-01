@@ -12,7 +12,6 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 CSV_FILE="$RESULT_DIR/fileio_palapa_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
 
 # Workload / concurrency
-THREADS=$(nproc)
 TEST_TIME=60
 ITERATIONS=10
 
@@ -23,7 +22,7 @@ MODE=rndrw
 # Ukuran total file = 2× RAM agar selalu lebih besar dari cache
 RAM_MB=$(free -m | awk '/^Mem:/ {print $2}')
 TOTAL_SIZE_MB=$(( RAM_MB * 2 ))
-TOTAL_SIZE="${TOTAL_SIZE_MB}M"
+TOTAL_SIZE="8G"
 
 FILE_NUM=1          # banyak file kecil
 RW_RATIO=1
@@ -35,7 +34,6 @@ echo "iteration,total_time_s,reads_s,writes_s,read_MiB_s,write_MiB_s,avg_lat_ms"
 
 echo -e "\nFile uji = $(pwd)"
 echo "Tiap iterasi  = $TEST_TIME s"
-echo "Threads       = $THREADS"
 echo "Mode I/O      = $MODE"
 echo "Block         = $BLOCK_SIZE"
 echo "fsync         = $FSYNC_FREQ"
@@ -47,8 +45,6 @@ echo "────────────────────────�
 sysbench fileio \
   --file-total-size="$TOTAL_SIZE" \
   --file-num="$FILE_NUM" \
-  --file-block-size="$BLOCK_SIZE" \
-  --file-test-mode="$MODE" \
   prepare
 
 ########### ─── BENCHMARK LOOP ──────────────────────────────────────────
@@ -64,7 +60,6 @@ for i in $(seq 1 "$ITERATIONS"); do
       --file-rw-ratio="$RW_RATIO" \
       --file-fsync-freq="$FSYNC_FREQ" \
       --file-extra-flags="$EXTRA_FLAGS" \
-      --threads="$THREADS" \
       --time="$TEST_TIME" run)
 
     # ── parsing hasil ────────────────────────────────────────────
