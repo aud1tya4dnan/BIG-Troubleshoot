@@ -12,7 +12,7 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 CSV_FILE="$RESULT_DIR/fileio_palapa_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
 
 # Workload / concurrency
-TEST_TIME=60
+TEST_TIME=300
 ITERATIONS=10
 
 # I/O pattern
@@ -20,8 +20,6 @@ BLOCK_SIZE=4K
 MODE=rndrw
 
 # Ukuran total file = 2× RAM agar selalu lebih besar dari cache
-RAM_MB=$(free -m | awk '/^Mem:/ {print $2}')
-TOTAL_SIZE_MB=$(( RAM_MB * 2 ))
 TOTAL_SIZE="8G"
 
 FILE_NUM=1          # banyak file kecil
@@ -38,7 +36,7 @@ echo "Mode I/O      = $MODE"
 echo "Block         = $BLOCK_SIZE"
 echo "fsync         = $FSYNC_FREQ"
 echo "CSV output    = $CSV_FILE"
-echo "MEM total     = ${RAM_MB} MB ⇒ file_total_size = $TOTAL_SIZE"
+echo "Toal Size     = $TOTAL_SIZE"
 echo "──────────────────────────────────────────────────────────────"
 
 ########### ─── PREPARE FILE TEST ───────────────────────────────────────
