@@ -18,8 +18,10 @@ hosts = [
     {"ip": ip_big3, "name": "big3", "local_dir": fr"{file_location}/big3", "has_iperf3": False},
 ]
 
+
 USERNAME = user_big
 PASSWORD = password_big
+
 
 def download_dir_sftp(hostname, port, username, password, remote_dir, local_dir):
     transport = paramiko.Transport((hostname, port))
@@ -48,7 +50,7 @@ for host in hosts:
 
     # Download sysbench results
     try:
-        sysbench_remote = "/home/sysbench_tests/*"
+        sysbench_remote = "/home/sysbench_tests"
         sysbench_local = os.path.join(host["local_dir"], "sysbench_tests")
         download_dir_sftp(
             hostname=host["ip"],
@@ -61,6 +63,7 @@ for host in hosts:
         print(f"✅ Sysbench dari {host['name']} tersimpan di {sysbench_local}")
     except Exception as e:
         print(f"❌ Gagal mengunduh sysbench dari {host['name']}: {e}")
+
 
     # Download iperf3 results jika tersedia
     if host.get("has_iperf3", False):
