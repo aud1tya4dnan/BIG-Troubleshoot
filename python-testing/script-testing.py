@@ -58,8 +58,6 @@ def run_test_on_host(host, vm_count, script_path):
         print(f"[{host['name']}] Error: {e}")
 
 def main():
-    print("PASTIKAN SEMUA DATA SUDAH DIEXTRACT SEBELUM MENJALANKAN SCRIPT INI!")
-    print("KETIKA MENJALANKAN SCRIPT INI SEMUA DATA DALAM /home/sysbench_tests AKAN DIHAPUS!")
     print("=== SYSBENCH TEST RUNNER ===")
     test_type = input("Mau test apa? (io / mem / cpu): ").strip().lower()
 
@@ -67,27 +65,55 @@ def main():
         print("❌ Jenis test tidak valid.")
         return
 
-    try:
-        vm_count = int(input("Mau dijalankan di berapa VM? (1 / 2 / 3): ").strip())
-        if vm_count not in [1, 2, 3]:
-            raise ValueError
-    except ValueError:
-        print("❌ Jumlah VM tidak valid.")
-        return
+    continuous = input("Apakah ingin melakukan continuous benchmark? (y/n): ").strip().lower()
+    
+    if continuous == 'y':
+        # Run benchmarks sequentially with 1, 2, and 3 VMs
+        for vm_count in range(1, 4):
+            print(f"\n=== Memulai benchmark dengan {vm_count} VM ===")
+            selected_hosts = hosts[:vm_count]
+            script_path = test_scripts[test_type]
 
-    selected_hosts = hosts[:vm_count]
-    script_path = test_scripts[test_type]
+            threads = []
+            for host in selected_hosts:
+                t = threading.Thread(target=run_test_on_host, args=(host, vm_count, script_path))
+                t.start()
+                threads.append(t)
 
-    threads = []
-    for host in selected_hosts:
-        t = threading.Thread(target=run_test_on_host, args=(host, vm_count, script_path))
-        t.start()
-        threads.append(t)
+            for t in threads:
+                t.join()
 
-    for t in threads:
-        t.join()
+            print(f"✅ Benchmark dengan {vm_count} VM selesai.")
+            
+            if vm_count < 3:
+                print("\nMenunggu 30 detik sebelum memulai benchmark selanjutnya...")
+                time.sleep(30)  # Wait 30 seconds between different VM count tests
+        
+        print("\n✅ Semua benchmark selesai.")
+        
+    else:
+        # Original single-run logic
+        try:
+            vm_count = int(input("Mau dijalankan di berapa VM? (1 / 2 / 3): ").strip())
+            if vm_count not in [1, 2, 3]:
+                raise ValueError
+        except ValueError:
+            print("❌ Jumlah VM tidak valid.")
+            return
 
-    print("✅ Semua test selesai.")
+        selected_hosts = hosts[:vm_count]
+        script_path = test_scripts[test_type]
+
+        threads = []
+        for host in selected_hosts:
+            t = threading.Thread(target=run_test_on_host, args=(host, vm_count, script_path))
+            t.start()
+            threads.append(t)
+
+        for t in threads:
+            t.join()
+
+        print("✅ Test selesai.")
     
 if __name__ == "__main__":
     main()
