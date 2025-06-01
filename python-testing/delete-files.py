@@ -47,7 +47,8 @@ def run_test_on_host(host, vm_count, script_path):
 def main():
     print("PASTIKAN SEMUA DATA SUDAH DIEXTRACT SEBELUM MENJALANKAN SCRIPT INI!")
     print("KETIKA MENJALANKAN SCRIPT INI SEMUA DATA DALAM /home/sysbench_tests AKAN DIHAPUS!")
-    print("=== SYSBENCH TEST RUNNER ===")
+    agreement = input("Apakah Anda yakin ingin melanjutkan? (y/n): ").strip().lower()
+    # print("=== SYSBENCH TEST RUNNER ===")
     # test_type = input("Mau test apa? (io / mem / cpu): ").strip().lower()
 
     # if test_type not in test_scripts:
@@ -61,22 +62,23 @@ def main():
     # except ValueError:
     #     print("❌ Jumlah VM tidak valid.")
     #     return
-    vm_count = 3  # Ganti dengan jumlah VM yang diinginkan
 
+    vm_count = 3  # Ganti dengan jumlah VM yang diinginkan
     selected_hosts = hosts[:vm_count]
     # script_path = test_scripts[test_type]
+    input_agreement = agreement
 
     threads = []
     for host in selected_hosts:
         # t = threading.Thread(target=run_test_on_host, args=(host, vm_count, script_path))
-        t = threading.Thread(target=run_test_on_host, args=(host, vm_count))
+        t = threading.Thread(target=run_test_on_host, args=(host, vm_count, input_agreement))
         t.start()
         threads.append(t)
 
     for t in threads:
         t.join()
 
-    print("✅ Semua test selesai.")
+    print("✅ Semua delete selesai.")
     
 if __name__ == "__main__":
     main()
