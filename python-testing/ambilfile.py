@@ -10,11 +10,12 @@ ip_big2 = os.environ.get('IP_BIG_2')
 ip_big3 = os.environ.get('IP_BIG_3')
 user_big = os.environ.get('USER')
 password_big = os.environ.get('PASS')
+file_location = os.environ.get('FILE_BIG')
 
 hosts = [
-    {"ip": ip_big1, "name": "big1", "local_dir": r"D:\TA_script\big1", "has_iperf3": True},
-    {"ip": ip_big2, "name": "big2", "local_dir": r"D:\TA_script\big2", "has_iperf3": True},
-    {"ip": ip_big3, "name": "big3", "local_dir": r"D:\TA_script\big3", "has_iperf3": False},
+    {"ip": ip_big1, "name": "big1", "local_dir": fr"{file_location}/big1", "has_iperf3": False},
+    {"ip": ip_big2, "name": "big2", "local_dir": fr"{file_location}/big2", "has_iperf3": False},
+    {"ip": ip_big3, "name": "big3", "local_dir": fr"{file_location}/big3", "has_iperf3": False},
 ]
 
 USERNAME = user_big
@@ -47,7 +48,7 @@ for host in hosts:
 
     # Download sysbench results
     try:
-        sysbench_remote = "/home/sysbench_tests"
+        sysbench_remote = "/home/sysbench_tests/*"
         sysbench_local = os.path.join(host["local_dir"], "sysbench_tests")
         download_dir_sftp(
             hostname=host["ip"],
