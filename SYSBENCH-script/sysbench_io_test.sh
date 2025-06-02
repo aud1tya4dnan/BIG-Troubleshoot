@@ -12,7 +12,7 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 CSV_FILE="$RESULT_DIR/fileio_palapa_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
 
 # Workload / concurrency
-TEST_TIME=60
+TEST_TIME=300
 ITERATIONS=10
 
 # I/O pattern
