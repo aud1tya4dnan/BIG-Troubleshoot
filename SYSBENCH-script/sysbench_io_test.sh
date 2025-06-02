@@ -12,7 +12,7 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 CSV_FILE="$RESULT_DIR/fileio_palapa_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
 
 # Workload / concurrency
-TEST_TIME=300
+TEST_TIME=60
 ITERATIONS=10
 
 # I/O pattern
@@ -58,6 +58,7 @@ for i in $(seq 1 "$ITERATIONS"); do
       --file-rw-ratio="$RW_RATIO" \
       --file-fsync-freq="$FSYNC_FREQ" \
       --file-extra-flags="$EXTRA_FLAGS" \
+      --threads=2 \
       --time="$TEST_TIME" run)
 
     # ── parsing hasil ────────────────────────────────────────────
