@@ -29,6 +29,12 @@ sed -i s/^#.*baseurl=http/baseurl=http/g /etc/yum.repos.d/*.repo
 sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/*.repo
 sudo -- bash -c 'echo "sslverify=false" >> /etc/yum.conf'
 
+# clear yum
+yum clean all
+
+# update yum
+yum update -y
+
 # install iperf3
 
 yum install -y iperf3
