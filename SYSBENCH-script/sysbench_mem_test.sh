@@ -33,7 +33,7 @@ echo "Iteration,Operation,Block Size,Total Size,Operations/sec,Transferred (MB/s
 for i in $(seq 1 $ITERATIONS); do
     echo "Running memory READ test iteration $i..."
 
-    OUTPUT=$(sysbench memory --memory-block-size=$MEM_BLOCKSIZE --memory-total-size=$MEM_TOTALSIZE --memory-scope=local --memory-access-mode=seq --memory-oper=read --threads=$THREADS run)
+    OUTPUT=$(sysbench memory --memory-block-size=$MEM_BLOCKSIZE --memory-total-size=$MEM_TOTALSIZE --memory-access-mode=seq --memory-oper=read --threads=$THREADS run)
 
     ops_sec=$(echo "$OUTPUT" | grep "Total operations:" | awk '{print $5}' | tr -d '()')
     
@@ -51,7 +51,7 @@ echo "Iteration,Operation,Block Size,Total Size,Operations/sec,Transferred (MB/s
 for i in $(seq 1 $ITERATIONS); do
     echo "Running memory WRITE test iteration $i..."
 
-    OUTPUT=$(sysbench memory --memory-block-size=$MEM_BLOCKSIZE --memory-total-size=$MEM_TOTALSIZE --memory-scope=local --memory-access-mode=seq --memory-oper=write --threads=$THREADS run)
+    OUTPUT=$(sysbench memory --memory-block-size=$MEM_BLOCKSIZE --memory-total-size=$MEM_TOTALSIZE --memory-access-mode=seq --memory-oper=write --threads=$THREADS run)
 
     ops_sec=$(echo "$OUTPUT" | grep "Total operations:" | awk '{print $5}' | tr -d '()')
 
