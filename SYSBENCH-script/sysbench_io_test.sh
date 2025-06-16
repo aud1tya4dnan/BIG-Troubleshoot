@@ -20,16 +20,15 @@ THREADS=2
 BLOCK_SIZE=4K
 MODE=rndrw
 
-# Ukuran total file = 2× RAM agar selalu lebih besar dari cache
 TOTAL_SIZE="8G"
-
-FILE_NUM=1          # banyak file kecil
+FILE_NUM=1
 RW_RATIO=1
 IO_MODE=async
-FSYNC_FREQ=0        # flush setiap request (paling realistis)
-EXTRA_FLAGS=direct  # bypass cache
+FSYNC_FREQ=0
+EXTRA_FLAGS=direct
 
-echo "iteration,total_time_s,reads_s,writes_s,read_MiB_s,write_MiB_s,avg_lat_ms" > "$CSV_FILE"
+# Header dengan penjelasan satuan
+echo "iteration,total_time_s,reads_s,writes_s,read_MB_s,write_MB_s,avg_lat_ms" > "$CSV_FILE"
 
 echo -e "\nFile uji = $(pwd)"
 echo "Tiap iterasi  = $TEST_TIME s"
@@ -37,17 +36,17 @@ echo "Mode I/O      = $MODE"
 echo "Block         = $BLOCK_SIZE"
 echo "fsync         = $FSYNC_FREQ"
 echo "CSV output    = $CSV_FILE"
-echo "Total Size     = $TOTAL_SIZE"
+echo "Total Size    = $TOTAL_SIZE"
 echo "Threads       = $THREADS"
 echo "──────────────────────────────────────────────────────────────"
 
-########### ─── PREPARE FILE TEST ───────────────────────────────────────
+# ─── PREPARE FILE TEST ───────────────────────────────────────────────
 sysbench fileio \
   --file-total-size="$TOTAL_SIZE" \
   --file-num="$FILE_NUM" \
   prepare
 
-########### ─── BENCHMARK LOOP ──────────────────────────────────────────
+# ─── BENCHMARK LOOP ───────────────────────────────────────────────────
 for i in $(seq 1 "$ITERATIONS"); do
     echo -e "\nIterasi $i / $ITERATIONS …"
 
@@ -63,16 +62,22 @@ for i in $(seq 1 "$ITERATIONS"); do
       --threads="$THREADS" \
       --time="$TEST_TIME" run)
 
-    # ── parsing hasil ────────────────────────────────────────────
+    # ── parsing hasil ───────────────────────────────────────────────
     total_time=$(echo "$OUTPUT" | awk '/total time:/ {print $3}')
     read_fio=$(echo "$OUTPUT" | awk '/reads\/s:/ {print $2}')
     write_fio=$(echo "$OUTPUT" | awk '/writes\/s:/ {print $2}')
-    read_throughput=$(echo "$OUTPUT" | awk '/read, MiB\/s:/ {print $3}')
-    write_throughput=$(echo "$OUTPUT" | awk '/written, MiB\/s:/ {print $3}')
+    
+    # Throughput: MiB/s → MB/s
+    read_mib=$(echo "$OUTPUT" | awk '/read, MiB\/s:/ {print $3}')
+    write_mib=$(echo "$OUTPUT" | awk '/written, MiB\/s:/ {print $3}')
+    read_mb=$(awk "BEGIN {printf \"%.2f\", $read_mib * 1.048576}")
+    write_mb=$(awk "BEGIN {printf \"%.2f\", $write_mib * 1.048576}")
+
     avg_lat=$(echo "$OUTPUT" | awk '/avg:/ {print $2}')
-    echo "$i,$total_time,$read_fio,$write_fio,$read_throughput,$write_throughput,$avg_lat" >> "$CSV_FILE"
+    
+    echo "$i,$total_time,$read_fio,$write_fio,$read_mb,$write_mb,$avg_lat" >> "$CSV_FILE"
 done
 
-########### ─── BERSIH-BERSIH ───────────────────────────────────────────
+# ─── CLEANUP ──────────────────────────────────────────────────────────
 sysbench fileio --file-total-size="$TOTAL_SIZE" --file-num="$FILE_NUM" cleanup
 echo -e "\nBenchmark selesai. Hasil lengkap di: $CSV_FILE"
