@@ -9,11 +9,12 @@ RESULT_DIR="/home/sysbench_tests/io_results_${VM_COUNT}_${INSTANCE_NAME}"
 mkdir -p "$RESULT_DIR"
 
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-CSV_FILE="$RESULT_DIR/fileio_palapa_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
+CSV_FILE="$RESULT_DIR/sysbench_io_fileio_palapa_${TIMESTAMP}_${VM_COUNT}_${INSTANCE_NAME}.csv"
 
 # Workload / concurrency
 TEST_TIME=60
 ITERATIONS=10
+THREADS=2
 
 # I/O pattern
 BLOCK_SIZE=4K
@@ -36,7 +37,8 @@ echo "Mode I/O      = $MODE"
 echo "Block         = $BLOCK_SIZE"
 echo "fsync         = $FSYNC_FREQ"
 echo "CSV output    = $CSV_FILE"
-echo "Toal Size     = $TOTAL_SIZE"
+echo "Total Size     = $TOTAL_SIZE"
+echo "Threads       = $THREADS"
 echo "──────────────────────────────────────────────────────────────"
 
 ########### ─── PREPARE FILE TEST ───────────────────────────────────────
@@ -58,6 +60,7 @@ for i in $(seq 1 "$ITERATIONS"); do
       --file-rw-ratio="$RW_RATIO" \
       --file-fsync-freq="$FSYNC_FREQ" \
       --file-extra-flags="$EXTRA_FLAGS" \
+      --threads="$THREADS" \
       --time="$TEST_TIME" run)
 
     # ── parsing hasil ────────────────────────────────────────────
